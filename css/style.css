@@ -90,7 +90,7 @@ background:radial-gradient(90% 40% at 85% 85%,#1929d6cc,transparent 70%),radial-
 @media(max-width:760px){.stats3{grid-template-columns:1fr}}
 /* cta */
 .cta{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 24px;position:relative;background:linear-gradient(#000a,#000d),url(../assets/cta.jpg) center/cover,#16161c}
-.cd{font:800 clamp(44px,11vw,150px) 'Orbitron',sans-serif;margin:16px 0 28px;letter-spacing:.02em;white-space:nowrap}
+.cd{font:650 clamp(44px,11vw,150px) 'Orbitron',sans-serif;margin:16px 0 28px;letter-spacing:.02em;white-space:nowrap}
 .tick{position:absolute;bottom:0;left:0;right:0;padding:12px 24px;display:flex;justify-content:space-between;align-items:center;font-size:13px;gap:12px;overflow:hidden}
 .tick i{width:7px;height:7px;background:#fff;flex:none}
 @media(max-width:700px){.tick i,.tick span:last-child{display:none}}
