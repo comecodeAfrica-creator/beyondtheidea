@@ -13,6 +13,18 @@ sel('role', O.role); sel('industry', O.industry); sel('stage', O.stage); sel('ch
 $('#rooms').innerHTML = O.rooms.map(([n, s]) => `<label class="room"><input type="radio" name="room" value="${n}" required><b>${n}</b><span>${s}</span></label>`).join('');
 $('#wants').innerHTML = O.wants.map(x => `<label class="chip"><input type="checkbox" name="wants" value="${x}">${x}</label>`).join('');
 
+// "Other" clears all other choices and opens a text box; picking any other option closes it
+$('#wants').onchange = e => {
+  const t = e.target, other = $('#wants input[value="Other"]'), box = $('#wantsOtherBox');
+  if (t === other && other.checked) {
+    document.querySelectorAll('#wants input').forEach(i => { if (i !== other) i.checked = false; });
+  } else if (t !== other && t.checked) {
+    other.checked = false;
+  }
+  box.hidden = !other.checked;
+  if (box.hidden) $('#wantsOther').value = ''; else $('#wantsOther').focus();
+};
+
 let regId = null;
 $('#f').onsubmit = async e => {
   e.preventDefault();
@@ -21,11 +33,15 @@ $('#f').onsubmit = async e => {
   const miss = need.find(k => !String(d.get(k) || '').trim());
   if (miss) { msg.textContent = 'Please complete all required fields, including your Build Room.'; (f.elements[miss] || f.elements.room).focus?.(); return; }
   if (!/^\S+@\S+\.\S+$/.test(d.get('email'))) { msg.textContent = 'Enter a valid email address.'; return; }
+  if (d.getAll('wants').includes('Other') && !$('#wantsOther').value.trim()) {
+    msg.textContent = 'Please type what you want from the conference.'; $('#wantsOther').focus(); return;
+  }
+  const wants = d.getAll('wants').map(w => w === 'Other' ? 'Other: ' + $('#wantsOther').value.trim() : w);
   const id = crypto.randomUUID();
   const row = {
     id, full_name: d.get('full_name').trim(), email: d.get('email').trim().toLowerCase(), phone: d.get('phone').trim(),
     country: d.get('country').trim(), city: d.get('city').trim() || null, role: d.get('role'), org_name: d.get('org_name').trim() || null,
-    industry: d.get('industry'), stage: d.get('stage'), build_room: d.get('room'), wants: d.getAll('wants'),
+    industry: d.get('industry'), stage: d.get('stage'), build_room: d.get('room'), wants,
     challenge: d.get('challenge'), heard_from: d.get('heard_from')
   };
   btn.disabled = true; msg.textContent = '';
