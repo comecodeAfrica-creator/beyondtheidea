@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Register — Beyond the Idea 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800&family=Courier+Prime:wght@400;700&family=Syne:wght@800&family=Orbitron:wght@800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="nav"><a class="logo" href="index.html">Beyond the Idea</a><span></span><ul><li><a href="index.html">Back to site</a></li></ul></nav>
+
+<main class="form">
+<div id="step1">
+  <h1>Register for Beyond the Idea 2026</h1>
+  <p class="lead">December 1–4, 2026 • Virtual. Fields marked * are required.</p>
+  <form id="f" novalidate>
+    <fieldset><legend>1. Personal information</legend>
+      <div class="fld"><label class="t" for="full_name">Full name *</label><input type="text" id="full_name" name="full_name" required autocomplete="name"></div>
+      <div class="fld"><label class="t" for="email">Email address *</label><input type="email" id="email" name="email" required autocomplete="email"></div>
+      <div class="fld"><label class="t" for="phone">Phone / WhatsApp number *</label><input type="tel" id="phone" name="phone" required autocomplete="tel"></div>
+      <div class="two">
+        <div class="fld"><label class="t" for="country">Country *</label><input type="text" id="country" name="country" required autocomplete="country-name"></div>
+        <div class="fld"><label class="t" for="city">State / City</label><input type="text" id="city" name="city"></div>
+      </div>
+    </fieldset>
+
+    <fieldset><legend>2. Professional / entrepreneurial profile</legend>
+      <div class="fld"><label class="t" for="role">What best describes you? *</label><select id="role" name="role" required></select></div>
+      <div class="fld"><label class="t" for="org_name">Business / organization name</label><input type="text" id="org_name" name="org_name"><span class="hint">Optional. Skip it if you don't currently have a business.</span></div>
+      <div class="fld"><label class="t" for="industry">Industry / area *</label><select id="industry" name="industry" required></select></div>
+    </fieldset>
+
+    <fieldset><legend>3. Your current stage</legend>
+      <div class="fld"><label class="t" for="stage">Which best describes where you are currently? *</label><select id="stage" name="stage" required></select></div>
+    </fieldset>
+
+    <fieldset><legend>4. Build Room selection</legend>
+      <p class="hint">Which Build Room would you like to join? Select one primary room.</p>
+      <div id="rooms"></div>
+    </fieldset>
+
+    <fieldset><legend>5. What do you want from the conference?</legend>
+      <p class="hint">What are you hoping to gain? Select all that apply.</p>
+      <div class="chips fld" id="wants"></div>
+      <div class="fld"><label class="t" for="challenge">What is the biggest challenge you are currently facing? *</label><select id="challenge" name="challenge" required></select></div>
+    </fieldset>
+
+    <fieldset><legend>6. How did you hear about us?</legend>
+      <div class="fld"><label class="t" for="heard">How did you hear about Beyond the Idea? *</label><select id="heard" name="heard_from" required></select></div>
+    </fieldset>
+
+    <p class="msg" id="msg" role="alert"></p>
+    <button class="btn" id="go" type="submit">Complete registration</button>
+  </form>
+</div>
+
+<div id="step2" hidden>
+  <h1>You're registered.</h1>
+  <p class="lead">Create your official participant profile image. Upload a photo and the conference frame is applied automatically.</p>
+  <canvas id="cv" width="1080" height="1080" aria-label="Profile image preview"></canvas>
+  <div class="fld"><label class="t" for="ph">Choose your photo</label><input type="file" id="ph" accept="image/*"></div>
+  <p class="msg" id="msg2" role="status"></p>
+  <button class="btn" id="dl" disabled>Download my profile image</button>
+</div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="js/config.js"></script>
+<script src="js/register.js"></script>
+</body>
+</html>
